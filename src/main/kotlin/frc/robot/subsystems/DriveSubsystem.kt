@@ -24,7 +24,7 @@ class DriveSubsystem : SubsystemBase() {
     val motorSix: CANSparkMax = CANSparkMax(6, MotorType.kBrushless).apply{ setInverted(false); setIdleMode(IdleMode.kBrake); }
     
     // Left/right motor controller groups
-    val leftMotors = MotorControllerGroup(motorOne, motorTwo, motorThree)
+    val leftMotors = MotorControllerGroup(motorOne, motorTwo, motorThree).apply{ setInverted(true); }
     val rightMotors = MotorControllerGroup(motorFour, motorFive, motorSix)
 
     // Input slew rate limiters
@@ -48,6 +48,11 @@ class DriveSubsystem : SubsystemBase() {
     */
     fun drive(xInput: Double, rInput: Double){
         differentialDrive.arcadeDrive(xSlew.calculate(xInput), rSlew.calculate(rInput)) 
+    }
+
+    fun stop(){
+        leftMotors.set(0.0);
+        rightMotors.set(0.0)
     }
 
 }

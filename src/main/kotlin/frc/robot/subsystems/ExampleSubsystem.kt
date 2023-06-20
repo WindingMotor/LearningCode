@@ -12,7 +12,7 @@ class ExampleSubsystem : SubsystemBase() {
     val motorOne = SparkMax(1, false)
 
 
- 
+    
     fun exampleMethodCommand(): CommandBase {
         // Inline construction of command goes here.
         // runOnce implicitly requires this subsystem.
